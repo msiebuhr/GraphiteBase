@@ -1,13 +1,13 @@
-package BulkMetric
+package MetricBatch
 
 import (
 	"github.com/msiebuhr/GraphiteBase"
 	"testing"
 )
 
-func TestBulkMetric(t *testing.T) {
+func TestMetricBatch(t *testing.T) {
 	// Create a new builk metric
-	bm := NewBulkMetric("foobar")
+	bm := NewMetricBatch("foobar")
 
 	bm.AddMetric(GraphiteBase.NewMetric(
 		"foobar",
