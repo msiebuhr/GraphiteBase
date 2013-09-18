@@ -1,7 +1,7 @@
 GraphiteBase
 ============
 
-Well-tested and fast blocks for building Graphite-like systems.
+Well-tested and fast primitives for building Graphite-like systems.
 
 # Docs
 
