@@ -5,7 +5,7 @@ Well-tested and fast primitives for building Graphite-like systems.
 
 # Docs
 
-See [godoc.org/github.com/msiebuhr/GraphiteBase](http://godoc.org/github.com/msieuhr/GraphiteBase).
+See [godoc.org/github.com/msiebuhr/GraphiteBase](http://godoc.org/github.com/msiebuhr/GraphiteBase).
 
 # Development
 
