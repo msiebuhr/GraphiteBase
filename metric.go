@@ -17,7 +17,7 @@ type Metric struct {
 
 func NewMetric(name string, timestamp int64, value float64) *Metric {
 	m := &Metric{}
-	m.Name =name
+	m.Name = name
 	m.Time = timestamp
 	m.Value = value
 	return m
