@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+// Parse a line of Graphite text ingestion format and return a new Metric.
 func parseGraphiteLine(line string) (*Metric, error) {
 	// Find newline-rune
 	fields := strings.Fields(line)
@@ -36,6 +37,11 @@ func parseGraphiteLine(line string) (*Metric, error) {
 	return NewMetric(name, time, value), nil
 }
 
+// Reads from a ReadCloser (often TCP/UDP connection or file) and outputs the
+// resulting metrics on the given channel.
+//
+// Note that the channel will be closed when the reader is done, so it cannot
+// readily be re-used between multiple readers.
 func GraphiteProtocolReader(conn io.ReadCloser, out chan *Metric) error {
 	scanner := bufio.NewScanner(conn)
 	defer conn.Close()
