@@ -5,8 +5,7 @@ Well-tested and fast blocks for building Graphite-like systems.
 
 # Docs
 
-	See
-[godoc.org/github.com/msiebuhr/GraphiteBase](http://godoc.org/github.com/msieuhr/GraphiteBase).
+See [godoc.org/github.com/msiebuhr/GraphiteBase](http://godoc.org/github.com/msieuhr/GraphiteBase).
 
 # Development
 
