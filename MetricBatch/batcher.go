@@ -14,6 +14,7 @@ func NewMetricBatcher() *MetricBatcher {
 	}
 }
 
+// Add a metric to the batcher
 func (mb *MetricBatcher) AddMetric(m *GraphiteBase.Metric) {
 	// If it isn't there, add a new MetricBatch
 	if _, ok := mb.data[m.Name]; ok == false {
@@ -21,4 +22,30 @@ func (mb *MetricBatcher) AddMetric(m *GraphiteBase.Metric) {
 	}
 
 	mb.data[m.Name].AddMetric(m)
+}
+
+// Return the largest batch available.
+//
+// Loops over all internal MetricBatch'es and returns the largest one it finds.
+func (mb *MetricBatcher) GetLargestBatch() *MetricBatch {
+	largest := &MetricBatch{}
+	for _, batch := range mb.data {
+		if batch.Size() > largest.Size() {
+			largest = batch
+		}
+	}
+
+	// Drop the batch
+	delete(mb.data, largest.Name)
+
+	return largest
+}
+
+// Return the total number of metrics currently cached inside the batcher.
+func (mb *MetricBatcher) Size() (size int) {
+	size = 0
+	for _, batch := range mb.data {
+		size += batch.Size()
+	}
+	return size
 }

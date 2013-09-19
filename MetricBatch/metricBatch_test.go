@@ -15,7 +15,10 @@ func TestMetricBatch(t *testing.T) {
 		2,
 	))
 
-	// TODO: Check size
+	// Check size
+	if bm.Size() != 1 {
+		t.Errorf("Size() to return 1, got %v", bm.Size())
+	}
 
 	// Gets the same metrics out?
 	metricList := bm.GetMetrics()
