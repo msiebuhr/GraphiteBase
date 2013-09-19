@@ -9,7 +9,7 @@ fmt:
 	go fmt ./...
 
 benchmark:
-	go test -bench=".*"
+	go test ./... -bench=".*"
 
 git-pre-commit-hook:
 	curl -s 'http://tip.golang.org/misc/git/pre-commit?m=text' > .git/hooks/pre-commit
