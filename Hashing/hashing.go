@@ -92,15 +92,17 @@ func (s *ConsistentHashRing) removeNode(node string) {
 func (s *ConsistentHashRing) getFirstMatchingIndex(key string) int {
 	keyHash := computeRingPosition(key)
 
-	// TODO: Calculate offset if we're wrapping
+	// If the hash is greater than the last element, it means we should wrp
+	// to the first element.
+	if keyHash > s.ring[len(s.ring)-1].hash {
+		return 0
+	}
 
-	// Figure out offset
-	nextIndexNoWrap := sort.Search(
+	// Do a binary search for the appropriate element
+	return sort.Search(
 		len(s.ring),
 		func(i int) bool { return s.ring[i].hash >= keyHash },
 	)
-
-	return nextIndexNoWrap
 }
 
 // Return first node hit in the ring for the given key.
