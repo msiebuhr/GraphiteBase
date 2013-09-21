@@ -34,6 +34,6 @@ func (b *MetricBatch) GetMetrics() []*GraphiteBase.Metric {
 	return out
 }
 
-func (b *MetricBatch) Size() int {
+func (b *MetricBatch) Len() int {
 	return len(b.Data)
 }

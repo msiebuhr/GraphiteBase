@@ -16,8 +16,8 @@ func TestMetricBatch(t *testing.T) {
 	))
 
 	// Check size
-	if bm.Size() != 1 {
-		t.Errorf("Size() to return 1, got %v", bm.Size())
+	if bm.Len() != 1 {
+		t.Errorf("Len() to return 1, got %v", bm.Len())
 	}
 
 	// Gets the same metrics out?
