@@ -29,6 +29,35 @@ func BenchmarkComputeRingPosition(b *testing.B) {
 	}
 }
 
+func TestAddRemoveNode(t *testing.T) {
+	r := NewConsistentHashRing([]string{}, 10)
+
+	// Add one node and confirm it only has those in the ring
+	r.AddNode("node_1")
+
+	for _, e := range r.ring {
+		if e.key != "node_1" {
+			t.Errorf("Expected node_1, got %v.", e.key)
+		}
+	}
+
+	// Add another node and remove the first and check again
+	r.AddNode("node_2")
+	r.RemoveNode("node_1")
+
+	for _, e := range r.ring {
+		if e.key != "node_2" {
+			t.Errorf("Expected node_2, got %v.", e.key)
+		}
+	}
+
+	// Remove the second node and check it's empty
+	r.RemoveNode("node_2")
+	if len(r.ring) != 0 {
+		t.Errorf("Expected ring to empty, got &%v.", r.ring)
+	}
+}
+
 var hashRingOutput_a_b_c_10 = []struct {
 	in  string
 	out []string

@@ -35,7 +35,7 @@ func NewConsistentHashRing(nodes []string, replicaCount int) *ConsistentHashRing
 
 	// Add the given nodes
 	for _, n := range nodes {
-		s.addNode(n)
+		s.AddNode(n)
 	}
 
 	return s
@@ -51,7 +51,7 @@ func computeRingPosition(key string) uint16 {
 }
 
 // Add a node to the ring
-func (s *ConsistentHashRing) addNode(node string) {
+func (s *ConsistentHashRing) AddNode(node string) {
 	s.nodes = append(s.nodes, node)
 
 	// Insert node into ring
@@ -63,30 +63,18 @@ func (s *ConsistentHashRing) addNode(node string) {
 	sort.Sort(s.ring)
 }
 
-func (s *ConsistentHashRing) removeNode(node string) {
-	/*
-		// Remove node from s.nodes
-		newNodes := make([]string, 0)
-		for _, nnode := range s.nodes {
-			if node != nnode {
-				newNodes = append(newNodes, nnode)
-			}
-		}
-		s.nodes = newNodes
+func (s *ConsistentHashRing) RemoveNode(node string) {
+	// Copy current ring-list and empty other state
+	newNodes := make([]string, 0)
+	s.nodes = make([]string, 0)
+	s.ring = ringEntries{}
 
-		// Remove node-references from the ringitself
-		positionsToDelete := make([]uint16, 0)
-		// Remove from ring
-		for rpos, rnode := range s.ring {
-			if rnode == node {
-				positionsToDelete = append(positionsToDelete, rpos)
-			}
+	// Copy over nodes we want to keep
+	for _, nnode := range newNodes {
+		if node != nnode {
+			s.AddNode(node)
 		}
-
-		for _, pos := range positionsToDelete {
-			delete(s.ring, pos)
-		}
-	*/
+	}
 }
 
 func (s *ConsistentHashRing) getFirstMatchingIndex(key string) int {
