@@ -17,16 +17,18 @@ type Metric struct {
 }
 
 // Create a new metric from the given parameters.
-func NewMetric(name string, timestamp int64, value float64) *Metric {
-	m := &Metric{}
-	m.Name = name
-	m.Time = timestamp
-	m.Value = value
-	return m
+func NewMetric(name string, value float64, timestamp int64) *Metric {
+	return &Metric{
+		Name: name,
+		MetricValues: MetricValues{
+			Value: value,
+			Time: timestamp,
+		},
+	}
 }
 
-// Stringifies metric with "<Name> <Time> <Value>", to match Graphites Text
+// Stringifies metric with "<Name> <Value> <Time>", to match Graphites Text
 // protocol.
 func (m *Metric) String() string {
-	return fmt.Sprintf("%s %d %v", m.Name, m.Time, m.Value)
+	return fmt.Sprintf("%s %v %d", m.Name, m.Value, m.Time)
 }

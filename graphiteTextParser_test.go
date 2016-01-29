@@ -17,12 +17,12 @@ func TestParseMetricLineOK(t *testing.T) {
 		t.Errorf("Expected name to be foo.bar, got %v", m.Name)
 	}
 
-	if m.Time != 10 {
-		t.Errorf("Expected time to be 10, got %v", m.Time)
-	}
-
 	if m.Value != 42.1 {
 		t.Errorf("Expected value to be 42.1, got %v", m.Value)
+	}
+
+	if m.Time != 10 {
+		t.Errorf("Expected time to be 10, got %v", m.Time)
 	}
 }
 

@@ -34,7 +34,7 @@ func parseGraphiteLine(line string) (*Metric, error) {
 	}
 
 	// Return new metric point
-	return NewMetric(name, time, value), nil
+	return NewMetric(name, value, time), nil
 }
 
 // Reads from a ReadCloser (often TCP/UDP connection or file) and outputs the
