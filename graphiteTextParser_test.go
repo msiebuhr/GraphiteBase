@@ -39,7 +39,10 @@ func TestGraphiteProtocolReaderOK(t *testing.T) {
 		bytes.NewReader([]byte("foo 1 1\nbar 2 2\nbaz 3 3\n")),
 	)
 
-	go GraphiteProtocolReader(in, out)
+	go func() {
+		GraphiteProtocolReader(in, out)
+		close(out)
+	}()
 
 	// Read output
 	data := []*Metric{}

@@ -39,13 +39,9 @@ func parseGraphiteLine(line string) (*Metric, error) {
 
 // Reads from a ReadCloser (often TCP/UDP connection or file) and outputs the
 // resulting metrics on the given channel.
-//
-// Note that the channel will be closed when the reader is done, so it cannot
-// readily be re-used between multiple readers.
 func GraphiteProtocolReader(conn io.ReadCloser, out chan *Metric) error {
 	scanner := bufio.NewScanner(conn)
 	defer conn.Close()
-	defer close(out)
 
 	// Parse lines and hand them to the back-end
 	for scanner.Scan() {
