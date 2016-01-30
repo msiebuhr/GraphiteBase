@@ -43,9 +43,7 @@ func NewConsistentHashRing(nodes []string, replicaCount int) *ConsistentHashRing
 
 // Compute md5(key) and return the first two bytes as an uint16
 func computeRingPosition(key string) uint16 {
-	h := md5.New()
-	h.Write([]byte(key))
-	sum := h.Sum(nil)
+	sum := md5.Sum([]byte(key))
 	i := uint16(sum[0])<<8 | uint16(sum[1])
 	return i
 }
