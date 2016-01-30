@@ -9,6 +9,10 @@ import (
 )
 
 // Parse a line of Graphite text ingestion format and return a new Metric.
+//
+// BUG(msiebuhr) Per
+// http://graphite.readthedocs.org/en/latest/releases/0_9_11.html?highlight=timestamp
+// Graphite accepts timestamps of -1 to set current time.
 func parseGraphiteLine(line string) (*Metric, error) {
 	// Find newline-rune
 	fields := strings.Fields(line)
