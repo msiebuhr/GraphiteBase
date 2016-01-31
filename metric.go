@@ -22,7 +22,7 @@ func NewMetric(name string, value float64, timestamp int64) *Metric {
 		Name: name,
 		MetricValues: MetricValues{
 			Value: value,
-			Time: timestamp,
+			Time:  timestamp,
 		},
 	}
 }
