@@ -30,5 +30,5 @@ func NewMetric(name string, value float64, timestamp int64) *Metric {
 // Stringifies metric with "<Name> <Value> <Time>", to match Graphites Text
 // protocol.
 func (m *Metric) String() string {
-	return fmt.Sprintf("%s %v %d", m.Name, m.Value, m.Time)
+	return fmt.Sprintf("%s %g %d", m.Name, m.Value, m.Time)
 }
